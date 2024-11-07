@@ -3,6 +3,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { CreateStockInput } from './dtos/create-stock/create-stock-input.dto';
 import { CreateStockerOutput } from './dtos/create-stock/create-stock-output.dto';
+import { FindManyStockByParkCodeInput } from './dtos/find-many-stock-by-park-code/find-many-stock-by-park-code-input.dto';
+import { FindManyStockByParkCodeOutput } from './dtos/find-many-stock-by-park-code/find-many-stock-by-park-code.dto';
 import { StockEntity } from './stock.entity';
 import { StockService } from './stock.service';
 
@@ -10,9 +12,13 @@ import { StockService } from './stock.service';
 export class StockResolver {
   constructor(@Inject() private stockService: StockService) {}
 
-  @Query(() => [StockEntity])
-  async stocks(): Promise<StockEntity[]> {
-    return [];
+  @Query(() => FindManyStockByParkCodeOutput)
+  async findManyStockByParkCode(@Args('input') input: FindManyStockByParkCodeInput): Promise<FindManyStockByParkCodeOutput> {
+    try {
+      return FindManyStockByParkCodeOutput.successOf(await this.stockService.findOneStockByParkCode(input));
+    } catch (error) {
+      return FindManyStockByParkCodeOutput.failOf(error.message);
+    }
   }
 
   @Mutation(() => CreateStockerOutput)

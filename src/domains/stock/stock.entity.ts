@@ -2,10 +2,11 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { ParkEnum } from 'src/common/enums/park.enum';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 
 @Entity('stocks')
 @ObjectType()
+@Index(['parkCode'])
 export class StockEntity extends CommonEntity {
   @Column({ type: 'int' })
   @Field(() => Int)

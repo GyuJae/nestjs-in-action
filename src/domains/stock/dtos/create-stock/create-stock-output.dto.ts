@@ -16,10 +16,10 @@ export class CreateStockerOutput extends CommonOutput {
     return output;
   }
 
-  static failOf(errorMessage: string): CreateStockerOutput {
+  static failOf(error: string): CreateStockerOutput {
     const output = new CreateStockerOutput();
     output.status = OutputStatus.FAIL;
-    output.error = errorMessage;
+    output.error = error;
     return output;
   }
 }
