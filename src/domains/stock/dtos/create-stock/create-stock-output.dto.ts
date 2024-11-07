@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { CommonOutput } from 'src/common/dtos/common-output.dto';
-import { OutputStatus } from 'src/common/enums/output-statue.enum';
+import { OutputStatus } from 'src/common/enums/output-status.enum';
 
 import { StockEntity } from '../../stock.entity';
 

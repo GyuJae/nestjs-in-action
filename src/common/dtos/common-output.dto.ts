@@ -1,7 +1,7 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 
-import { OutputStatusEnum, OutputStatus } from '../enums/output-statue.enum';
+import { OutputStatusEnum, OutputStatus } from '../enums/output-status.enum';
 
 @ObjectType({ isAbstract: true })
 export abstract class CommonOutput {
