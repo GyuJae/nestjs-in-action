@@ -1,29 +1,26 @@
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+/* eslint-disable unicorn/prefer-spread */
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { appConfig, appConfigSchema } from './configs/app.config';
+import { GraphqlConfigModule } from './configs/modules/graphql-config/graphql-config.module';
+import { TypeOrmConfigModule } from './configs/modules/typeorm-config/typeorm-config.module';
+import { sqliteConfig, sqliteConfigSchema } from './configs/sqlite.config';
 import { StockModule } from './domains/stock/stock.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // TODO : set to false in production
-      namingStrategy: new SnakeNamingStrategy(),
-    }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      playground: false,
-      autoSchemaFile: true,
-      sortSchema: true,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+    TypeOrmConfigModule,
+    GraphqlConfigModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [appConfig, sqliteConfig],
+      validationSchema: appConfigSchema.concat(sqliteConfigSchema),
+      validationOptions: {
+        abortEarly: true,
+      },
     }),
     StockModule,
   ],

@@ -1,9 +1,11 @@
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe, Logger as DefaultLogger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
 
+import type { ConfigServiceType } from './types/config-service.type';
 import type { INestApplication } from '@nestjs/common';
 
 export function setNestApp<T extends INestApplication>(app: T): void {
@@ -18,7 +20,12 @@ async function bootstrap() {
 
   setNestApp(app);
 
-  await app.listen(process.env.PORT ?? 3000);
+  const configService = app.get(ConfigService<ConfigServiceType>);
+
+  const APP_CONFIG = configService.get('app', { infer: true })!;
+
+  await app.listen(APP_CONFIG.port ?? 3000, APP_CONFIG.address ?? 'localhost');
+  DefaultLogger.log(`🚀 Application is running on: ${await app.getUrl()}`);
 }
 
 void bootstrap();

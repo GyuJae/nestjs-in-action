@@ -12,6 +12,11 @@ import { StockService } from './stock.service';
 export class StockResolver {
   constructor(@Inject() private stockService: StockService) {}
 
+  @Query(() => String)
+  async hello(): Promise<string> {
+    return 'hello';
+  }
+
   @Query(() => FindManyStockByParkCodeOutput)
   async findManyStockByParkCode(@Args('input') input: FindManyStockByParkCodeInput): Promise<FindManyStockByParkCodeOutput> {
     try {
