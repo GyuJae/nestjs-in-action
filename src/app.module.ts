@@ -2,8 +2,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { appConfig, appConfigSchema } from './configs/app.config';
 import { GraphqlConfigModule } from './configs/modules/graphql-config/graphql-config.module';
 import { TypeOrmConfigModule } from './configs/modules/typeorm-config/typeorm-config.module';
@@ -24,7 +22,7 @@ import { StockModule } from './domains/stock/stock.module';
     }),
     StockModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
