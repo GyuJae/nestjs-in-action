@@ -10,6 +10,9 @@ import { GraphQLModule } from '@nestjs/graphql';
       playground: false,
       autoSchemaFile: true,
       sortSchema: true,
+      subscriptions: {
+        ['graphql-ws']: true,
+      },
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
   ],

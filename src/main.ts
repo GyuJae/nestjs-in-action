@@ -1,16 +1,17 @@
-import { ClassSerializerInterceptor, ValidationPipe, Logger as DefaultLogger } from '@nestjs/common';
+import { ValidationPipe, Logger as DefaultLogger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
+import { AppClassSerializerInterceptor } from './common/interceptors/app-class-serializer.interceptor';
 
 import type { ConfigServiceType } from './types/config-service.type';
 import type { INestApplication } from '@nestjs/common';
 
 export function setNestApp<T extends INestApplication>(app: T): void {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  app.useGlobalInterceptors(new AppClassSerializerInterceptor(app.get(Reflector)));
 }
 
 async function bootstrap() {
