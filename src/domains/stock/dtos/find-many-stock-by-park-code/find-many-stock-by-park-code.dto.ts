@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { CommonOutput } from 'src/common/dtos/common-output.dto';
-import { OutputStatus } from 'src/common/enums/output-status.enum';
+import { OutputStatusEnum } from 'src/common/enums/output-status.enum';
 
 import { StockEntity } from '../../stock.entity';
 
@@ -12,14 +12,14 @@ export class FindManyStockByParkCodeOutput extends CommonOutput {
   static successOf(stocks: StockEntity[]): FindManyStockByParkCodeOutput {
     const output = new FindManyStockByParkCodeOutput();
     output.stocks = stocks;
-    output.status = OutputStatus.SUCCESS;
+    output.status = OutputStatusEnum.SUCCESS;
     return output;
   }
 
   static failOf(message: string): FindManyStockByParkCodeOutput {
     const output = new FindManyStockByParkCodeOutput();
     output.error = message;
-    output.status = OutputStatus.FAIL;
+    output.status = OutputStatusEnum.FAIL;
     return output;
   }
 }

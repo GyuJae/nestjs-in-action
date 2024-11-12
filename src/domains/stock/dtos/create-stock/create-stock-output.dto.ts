@@ -1,24 +1,24 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { CommonOutput } from 'src/common/dtos/common-output.dto';
-import { OutputStatus } from 'src/common/enums/output-status.enum';
+import { OutputStatusEnum } from 'src/common/enums/output-status.enum';
 
 import { StockEntity } from '../../stock.entity';
 
 @ObjectType()
-export class CreateStockerOutput extends CommonOutput {
+export class CreateStockOutput extends CommonOutput {
   @Field(() => StockEntity, { nullable: true })
   stock: StockEntity | null;
 
-  static successOf(stock: StockEntity): CreateStockerOutput {
-    const output = new CreateStockerOutput();
-    output.status = OutputStatus.SUCCESS;
+  static successOf(stock: StockEntity): CreateStockOutput {
+    const output = new CreateStockOutput();
+    output.status = OutputStatusEnum.SUCCESS;
     output.stock = stock;
     return output;
   }
 
-  static failOf(error: string): CreateStockerOutput {
-    const output = new CreateStockerOutput();
-    output.status = OutputStatus.FAIL;
+  static failOf(error: string): CreateStockOutput {
+    const output = new CreateStockOutput();
+    output.status = OutputStatusEnum.FAIL;
     output.error = error;
     return output;
   }

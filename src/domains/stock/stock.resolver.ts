@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSubService } from 'src/shared/pubsub/pubsub.service';
 
 import { CreateStockInput } from './dtos/create-stock/create-stock-input.dto';
-import { CreateStockerOutput } from './dtos/create-stock/create-stock-output.dto';
+import { CreateStockOutput } from './dtos/create-stock/create-stock-output.dto';
 import { FindManyStockByParkCodeInput } from './dtos/find-many-stock-by-park-code/find-many-stock-by-park-code-input.dto';
 import { FindManyStockByParkCodeOutput } from './dtos/find-many-stock-by-park-code/find-many-stock-by-park-code.dto';
 import { StockSubscriptionEnum } from './stock-subscription.enum';
@@ -26,19 +26,19 @@ export class StockResolver {
     }
   }
 
-  @Mutation(() => CreateStockerOutput)
+  @Mutation(() => CreateStockOutput)
   async createStock(
     @Args('input')
     input: CreateStockInput,
-  ): Promise<CreateStockerOutput> {
+  ): Promise<CreateStockOutput> {
     try {
       const stock = await this.stockService.createStock(input);
 
       await this.pubSubService.publish(StockSubscriptionEnum.STOCK_CREATED, { [StockSubscriptionEnum.STOCK_CREATED]: stock });
 
-      return CreateStockerOutput.successOf(stock);
+      return CreateStockOutput.successOf(stock);
     } catch (error) {
-      return CreateStockerOutput.failOf(error.message);
+      return CreateStockOutput.failOf(error.message);
     }
   }
 
