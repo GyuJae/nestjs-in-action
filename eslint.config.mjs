@@ -3,10 +3,14 @@ import tseslint from 'typescript-eslint';
 import TsParser from '@typescript-eslint/parser';
 import UnicornPlugin from 'eslint-plugin-unicorn';
 import ImportPlugin from 'eslint-plugin-import';
+import EnumKeyValuePlugin from './.eslint-rules/enum-key-value-match.mjs';
+
 
 const plugins = {
   import: ImportPlugin,
   unicorn: UnicornPlugin,
+  'enum-key-value': EnumKeyValuePlugin,
+
 };
 
 export default [
@@ -171,6 +175,7 @@ export default [
           },
         },
       ],
+      'enum-key-value/enum-key-value-match': 'error'
     },
   },
   {
