@@ -16,7 +16,7 @@ import type { FindManyStockByParkCodeOutput } from 'src/domains/stock/dtos/find-
 import type { StockEntity } from 'src/domains/stock/stock.entity';
 import type { DataSource } from 'typeorm';
 
-describe('StockResolver (e2e)', () => {
+describe('StockResolver', () => {
   let app: INestApplication;
   let dataSource: DataSource;
   let stockService: StockService;
