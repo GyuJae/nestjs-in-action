@@ -18,7 +18,7 @@ describe('StockService', () => {
       providers: [StockQueryRepository, StockService],
     }).compile();
 
-    stockService = module.get<StockService>(StockService);
+    stockService = module.get(StockService);
   });
 
   it('재고를 생성 할 수 있습니다', async () => {

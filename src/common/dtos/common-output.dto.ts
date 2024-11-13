@@ -1,4 +1,4 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 import { OutputStatusEnum } from '../enums/output-status.enum';
 
@@ -10,7 +10,3 @@ export abstract class CommonOutput {
   @Field(() => String, { nullable: true })
   error?: string;
 }
-
-registerEnumType(OutputStatusEnum, {
-  name: 'EnumOutputStatus',
-});

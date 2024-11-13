@@ -7,6 +7,7 @@ import { GraphqlConfigModule } from './configs/modules/graphql-config/graphql-co
 import { TypeOrmConfigModule } from './configs/modules/typeorm-config/typeorm-config.module';
 import { sqliteConfig, sqliteConfigSchema } from './configs/sqlite.config';
 import { HealthModule } from './domains/health/health.module';
+import { HistoryModule } from './domains/history/history.module';
 import { StockModule } from './domains/stock/stock.module';
 
 @Module({
@@ -22,6 +23,7 @@ import { StockModule } from './domains/stock/stock.module';
       },
     }),
     HealthModule,
+    HistoryModule,
     StockModule,
   ],
   controllers: [],
