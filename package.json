@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json --runInBand --detectOpenHandles"
+    "test:e2e": "jest --config ./test/jest-e2e.json --runInBand --detectOpenHandles",
+    "test:integration": "jest --config ./integration-test/jest-integration.json --runInBand --detectOpenHandles"
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
@@ -37,6 +38,7 @@
     "joi": "^17.13.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
+    "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
     "ts-jenum": "^2.2.2",
     "typeorm": "^0.3.20",
