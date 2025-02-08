@@ -1,12 +1,8 @@
-# SMOB POS API
+# NestJS IN Action
 
 ## Required
 
 - Node.js v20 or above
-
-## Features
-
-- TODO
 
 ## Getting Started
 
@@ -29,8 +25,6 @@ yarn build
 
 yarn start
 ```
-
-// TODO docker compose를 활용하여 개발환경 구축
 
 ## Test
 
